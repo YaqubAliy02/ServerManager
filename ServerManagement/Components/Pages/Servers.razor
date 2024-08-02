@@ -1,4 +1,5 @@
 ﻿@page "/servers"
+@inject NavigationManager NavigationManager
 
 <h3>Servers</h3>
 <br />
@@ -11,9 +12,9 @@
                 <div class="card">
                     <img src="@($"/images/{city}.png")" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <button type="button" class="btn btn-outline-info">@city</button>
+                        <button type="button" class="btn btn-outline-info">@city</button>
                     </div>
-                </div>  
+                </div>
             </div>
         }
     </div>
@@ -29,7 +30,13 @@
                 @(server.IsOnline ? "online" : "offline")
             </span>
             &nbsp;
-                <a href="/servers/@server.Id" class="link-primary">Edit</a>
+            <a href="/servers/@server.Id" class="link-primary">Edit</a>
+            &nbsp;
+            <EditForm Model="server"
+                      FormName="@($"form-server-{server.Id}")"
+                      OnValidSubmit="@(() =>{DeleteServer(server.Id); })">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </EditForm>
         </li>
     }
 </ul>
@@ -38,5 +45,14 @@
 
 @code {
     private List<Server> servers = ServersRepository.GetServersByCity("Toronto");
-    private List<string> cities = CitiesRepository.GetCities();
+    private List<String> cities = CitiesRepository.GetCities();
+
+    private void DeleteServer(int serverId)
+    {
+        if (serverId > 0)
+        {
+            ServersRepository.DeleteServer(serverId);
+            NavigationManager.NavigateTo("/servers");
+        }
+    }
 }

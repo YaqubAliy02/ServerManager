@@ -26,11 +26,11 @@
             servers.Add(server);
         }
 
-        public static List<Server> GetServers() => servers; 
+        public static List<Server> GetServers() => servers;
 
         public static List<Server> GetServersByCity(string cityName)
         {
-            return servers.Where(s => s.City.Equals(cityName, 
+            return servers.Where(s => s.City.Equals(cityName,
                 StringComparison.OrdinalIgnoreCase))
                 .ToList();
         }
