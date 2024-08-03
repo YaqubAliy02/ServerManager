@@ -46,3 +46,5 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+# This project for beginner Blazor learner as a guidance!!! [for Beginner]
+If you want to this kind of guidance for learning new technology follow to my account: https://github.com/YaqubAliy02
