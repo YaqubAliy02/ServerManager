@@ -1,0 +1,22 @@
+﻿@inject NavigationManager NavigationManager
+
+@if (this.servers is not null && this.servers.Count > 0)
+{
+    <ul>
+        <Virtualize Items="this.servers" Context="server">
+           <ServerComponent Server="server"></ServerComponent>
+        </Virtualize>
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public string CityName { get; set; }
+
+    private List<Server> servers;
+
+    protected override void OnParametersSet()
+    {
+        this.servers = ServersRepository.GetServersByCity(CityName??"Toronto");
+    }
+}
