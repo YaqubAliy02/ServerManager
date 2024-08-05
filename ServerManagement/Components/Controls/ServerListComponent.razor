@@ -13,10 +13,20 @@
     [Parameter]
     public string CityName { get; set; }
 
+    [Parameter]
+    public string SearchFilter { get; set; } = "";
+
     private List<Server> servers;
 
     protected override void OnParametersSet()
     {
-        this.servers = ServersRepository.GetServersByCity(CityName??"Toronto");
+        if (string.IsNullOrWhiteSpace(this.SearchFilter))
+        {
+            this.servers = ServersRepository.GetServersByCity(CityName ?? "Toronto");
+        }
+        else
+        {
+            this.servers = ServersRepository.SearchServers(this.SearchFilter);
+        }
     }
 }
