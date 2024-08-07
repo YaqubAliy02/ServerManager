@@ -13,6 +13,10 @@
     [Parameter]
     public EventCallback<string> SearchBarCallback { get; set; }
 
+    public void ClearFilter()
+    {
+        this.serverFilter = string.Empty;
+    }
     private string serverFilter = "";
 
     private void HandleSearch()
