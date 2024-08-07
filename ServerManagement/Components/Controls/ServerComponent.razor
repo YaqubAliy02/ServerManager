@@ -8,6 +8,28 @@
             @(Server.IsOnline ? "online" : "offline")
         </span>
         &nbsp;
+           
+        &nbsp;
+        @if(Server.IsOnline)
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(1,50);
+            <text>@randomNumber</text>
+            <button 
+                type="button" 
+                class="btn btn-outline-danger" @onclick="@(() => {Server.IsOnline = false;})">
+                Turn Off
+            </button>
+        }
+        else
+        {
+            <text>N/A</text>
+            <button type="button"
+                    class="btn btn-outline-success" @onclick="@(() => {Server.IsOnline = true;})">
+                Turn On
+            </button>
+        }
+        &nbsp;
         <a href="/Servers/@Server.Id" class="link-primary">Edit</a>
         &nbsp;
         <EditForm Model="Server"
@@ -22,6 +44,7 @@
     [Parameter]
     public Server Server { get; set; }
 
+
     private void DeleteServer(int ServerId)
     {
         if (ServerId > 0)
@@ -30,4 +53,5 @@
             NavigationManager.NavigateTo("/Servers", true);
         }
     }
+
 }
